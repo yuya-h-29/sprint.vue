@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <h1>{{ title }}</h1>
+    <h1>{{}}</h1>
+
     <navbar />
     <allPhotos />
     <singlePhoto />
@@ -12,7 +13,9 @@
 import Navbar from "./components/Navbar";
 import AllPhotos from "./components/AllPhotos";
 import SinglePhoto from "./components/SinglePhoto";
-import { listObjects, getSingleObject, saveObject } from "../utils/index";
+import { listObjects} from "../utils/index";
+
+//  getSingleObject, saveObject
 
 export default {
   name: "App",
@@ -22,8 +25,16 @@ export default {
     singlePhoto: SinglePhoto,
   },
   data: () => ({
-    title: "Photo Upload Appppfsafasfpppp",
+    photo: [],
   }),
+  methods: {
+      func1:function name(params) {
+
+      },
+  //     selectOnePhoto(el) {
+  // console.log("something else")
+  //     }
+  //   }
 };
 </script>
 

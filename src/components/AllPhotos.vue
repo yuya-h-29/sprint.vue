@@ -1,13 +1,13 @@
 <template>
-  <div v-if="all" class="container"><p>this is all photo</p></div>
+  <div class="container"><p>this is all photo</p></div>
 </template>
 
 <script>
 export default {
   name: "AllPhotos",
-  data: () => {
-    all: true;
-  },
+  // data: () => {
+  //   all: true;
+  // },
 };
 </script>
 
