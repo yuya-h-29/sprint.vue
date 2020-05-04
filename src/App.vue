@@ -34,6 +34,9 @@ export default {
   //     selectOnePhoto(el) {
   // console.log("something else")
   //     }
+
+
+  //
   //   }
 };
 </script>
