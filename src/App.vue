@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-    <!-- <img ：src="photos" alt="" srcset="" /> -->
-    <!-- <h1>{{ func1() }}</h1> -->
-    <!-- <h1>{{ photos }}</h1> -->
-    <!-- <div v-for="n in 100" :key="item.message"> -->
-    <!-- <img src="" alt="" srcset=""> -->
-    <!-- </div> -->
+    <h1>{{ func1() }}</h1>
+
     <navbar />
     <allPhotos />
+    <!-- this is how diplay pictures -->
+    <div v-for="photo in this.photos" :key="photo.id">
+      <img :src="photo.url" class="pic" />
+    </div>
+
     <singlePhoto />
   </div>
 </template>
@@ -29,34 +30,45 @@ export default {
     singlePhoto: SinglePhoto,
   },
   data: () => ({
-    photos: [],
+    photos: [], //=>{{index:1,url:url1},{inde}]
     currentView: "all",
     selectedPhoto: "none",
   }),
   methods: {
     func1: async function getAllPictures() {
       const arrOfPromisePictures = await listObjects();
-      // console.log(arrOfPromisePictures);
       const arrOrPicFiles = arrOfPromisePictures.map((obj) => {
         return obj.Key;
       });
-      const changeToBase64 = Promise.all(
+      const getArrOfFiles = await Promise.all(
         arrOrPicFiles.map((fileName) => {
           return getSingleObject(fileName);
         })
-      ).then((result) => {
-        result.map((pictureData) => {
-          return "data:image/jpg;base64," + pictureData;
-        });
+      );
+      const changeToBase64 = getArrOfFiles.map((pictureData) => {
+        return "data:image/jpg;base64," + pictureData;
       });
-      return this.photos.push(changeToBase64);
+
+      // console.log(changeToBase64)
+
+      for (let i = 0; i < changeToBase64.length; i++){
+        this.photos.push({id:i, url:changeToBase64[i]})
+      }
+      // this.photos = [...changeToBase64];
+      // console.log(this.photos);
+      // this.photo.concat(changeToBase64)
+      // return this.photos;
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   text-align: center;
+}
+.pic {
+  width: 100px;
+  height: 100px;
 }
 </style>
