@@ -1,14 +1,25 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-    <h1>{{ func1() }}</h1>
+    <!-- <h1>{{ func1() }}</h1> -->
+
+    <div v-if="currentView === 'all'">
+      <div v-for="photo in this.photos" :key="photo.id">
+        <allPhotos :photo="photo" />
+      </div>
+    </div>
+
+    
+
+    <div v-else>
+      <singlePhoto >
+    </div>
 
     <navbar />
-    <allPhotos />
     <!-- this is how diplay pictures -->
-    <div v-for="photo in this.photos" :key="photo.id">
+    <!-- <div v-for="photo in this.photos" :key="photo.id">
       <img :src="photo.url" class="pic" />
-    </div>
+    </div>-->
 
     <singlePhoto />
   </div>
@@ -49,15 +60,9 @@ export default {
         return "data:image/jpg;base64," + pictureData;
       });
 
-      // console.log(changeToBase64)
-
       for (let i = 0; i < changeToBase64.length; i++){
         this.photos.push({id:i, url:changeToBase64[i]})
       }
-      // this.photos = [...changeToBase64];
-      // console.log(this.photos);
-      // this.photo.concat(changeToBase64)
-      // return this.photos;
     },
   },
 };
@@ -66,9 +71,5 @@ export default {
 <style scoped>
 #app {
   text-align: center;
-}
-.pic {
-  width: 100px;
-  height: 100px;
 }
 </style>

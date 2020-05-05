@@ -1,10 +1,13 @@
 <template>
-  <div class="container"><p>this is all photo</p></div>
+  <div class="container">
+    <img :src="photo.url" class="pic" />
+  </div>
 </template>
 
 <script>
 export default {
   name: "AllPhotos",
+  props: ["photo"],
   // data: () => {
   //   all: true;
   // },
@@ -14,5 +17,9 @@ export default {
 <style scoped>
 .container {
   background-color: rgb(190, 190, 190);
+}
+.pic {
+  width: 100px;
+  height: 100px;
 }
 </style>
